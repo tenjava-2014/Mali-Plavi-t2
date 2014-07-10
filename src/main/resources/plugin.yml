@@ -1,0 +1,3 @@
+name: Mali-Plavi-t2
+main: com.tenjava.entries.Mali_Plavi.t2.TenJava
+version: '${project.version}'

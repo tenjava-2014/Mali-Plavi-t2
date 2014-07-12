@@ -49,9 +49,16 @@ public class Listener implements org.bukkit.event.Listener{
 				ItemMeta cm = ci.getItemMeta();
 				cm.setDisplayName("Creeper");
 				ci.setItemMeta(cm);
+				//
+				ItemStack si = new ItemStack(Material.MONSTER_EGG,1,(short)1,(byte)51);
+				ItemMeta sm = ci.getItemMeta();
+				sm.setDisplayName("Skeleton");
+				si.setItemMeta(sm);
 				
-				spawn = Bukkit.createInventory(null, 27,"Spawn");
+				
+				spawn = Bukkit.createInventory(null, 54,"Spawn");
 				spawn.setItem(0, ci);
+				spawn.setItem(1, si);
 				p.openInventory(spawn);
 			}
 		}

@@ -42,11 +42,20 @@ public class Listener implements org.bukkit.event.Listener{
 				mm.setDisplayName("Messages");
 				mm.setLore(ml);
 				m.setItemMeta(mm);
+				//
+				ItemStack music = new ItemStack(Material.JUKEBOX);
+				ItemMeta mum = m.getItemMeta();
+				ArrayList<String> mul = new ArrayList<String>();
+				mul.add(ChatColor.GRAY + "Plays music");
+				mum.setDisplayName("Music");
+				mum.setLore(mul);
+				music.setItemMeta(mum);
 				
 				
 				//if(p.getItemInHand().getItemMeta().getDisplayName() == "Phone"){
 					i = Bukkit.createInventory(null, 27, "Phone");
 					i.setItem(1, m);
+					i.setItem(3, music);
 					p.openInventory(i);
 				//}
 			}	
@@ -57,15 +66,16 @@ public class Listener implements org.bukkit.event.Listener{
 	public void onInventoryClick(InventoryClickEvent e){
 		Player p = (Player) e.getWhoClicked();
 		if(e.getCurrentItem().getType() == Material.PAPER){
-			p.sendMessage("pass");
 				if(e.getInventory().getTitle() == "Phone"){
-					p.sendMessage("pass");
 					p.closeInventory();
 				p.sendMessage("TO(say the person):");
 				to.put(p, true);
 				
 				//msg.setItem(1, new ItemStack(Material.THIN_GLASS));
 			}
+		}
+		else if(e.getCurrentItem().getType() == Material.JUKEBOX){
+			
 		}
 	}
 	@EventHandler
@@ -77,12 +87,12 @@ public class Listener implements org.bukkit.event.Listener{
 				if(m.equals(p)){
 						p.sendMessage(ChatColor.DARK_RED + "You can't send message to yourself");
 						p.sendMessage("TO(say the person):");
-						e.setCancelled(true);
+						e.setMessage(null);
 				}
 				for(Player all : Bukkit.getOnlinePlayers()){
 					if(all.equals(m)){
 						player = all;
-						e.setCancelled(true);
+						e.setMessage(null);
 						to.put(p, false);
 						ms.put(p, true);
 						p.sendMessage("Message:");
@@ -95,7 +105,7 @@ public class Listener implements org.bukkit.event.Listener{
 		if(ms.containsKey(p) | ms.get(p).equals(true)){
 			msg = m;
 			player.sendMessage(ChatColor.AQUA + "[" + p + " -> You] " + msg);
-			e.setCancelled(true);
+			e.setMessage(null);
 		}
 		}
 	}

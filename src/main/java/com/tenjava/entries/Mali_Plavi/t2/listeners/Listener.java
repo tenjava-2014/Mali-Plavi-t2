@@ -66,8 +66,8 @@ public class Listener implements org.bukkit.event.Listener{
 				ItemStack s = new ItemStack(Material.MINECART);
 				ItemMeta sm = m.getItemMeta();
 				ArrayList<String> sl = new ArrayList<String>();
-				sl.add(ChatColor.GRAY + "Shop");
-				sm.setDisplayName("Buy stuff");
+				sl.add(ChatColor.GRAY + "Buy stuff");
+				sm.setDisplayName("Shop");
 				sm.setLore(sl);
 				s.setItemMeta(sm);
 				
@@ -77,7 +77,7 @@ public class Listener implements org.bukkit.event.Listener{
 					i.setItem(1, m);
 					i.setItem(3, music);
 					i.setItem(5, h);
-					i.setItem(8, s);
+					i.setItem(7, s);
 					p.openInventory(i);
 				//}
 			}	
@@ -136,7 +136,7 @@ public class Listener implements org.bukkit.event.Listener{
 			p.closeInventory();
 		}else if(e.getCurrentItem().getType() == Material.MINECART){
 			e.setCancelled(true);
-			shop = Bukkit.createInventory(null, 8,"SHOP");
+			shop = Bukkit.createInventory(null, 9,"Shop");
 			shop.addItem(new ItemStack(Material.COOKED_BEEF,64));
 			shop.addItem(new ItemStack(Material.EXP_BOTTLE,16));
 			p.openInventory(shop);
@@ -158,6 +158,7 @@ public class Listener implements org.bukkit.event.Listener{
 						p.sendMessage(ChatColor.DARK_RED + "You can't send message to yourself");
 						p.sendMessage("TO(say the person):");
 						e.setMessage(null);
+						e.setCancelled(true);
 				}
 				for(Player all : Bukkit.getOnlinePlayers()){
 					if(all.equals(m)){
@@ -166,7 +167,7 @@ public class Listener implements org.bukkit.event.Listener{
 						to.put(p, false);
 						ms.put(p, true);
 						p.sendMessage("Message:");
-						break;
+						return;
 					}
 					}
 				p.sendMessage(ChatColor.DARK_RED + "That player is not on the server");

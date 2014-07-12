@@ -135,8 +135,17 @@ public class Listener implements org.bukkit.event.Listener{
 			p.setHealth(p.getHealthScale());
 			p.closeInventory();
 		}else if(e.getCurrentItem().getType() == Material.MINECART){
-			shop = Bukkit.createInventory(null, 9,"SHOP");
+			e.setCancelled(true);
+			shop = Bukkit.createInventory(null, 8,"SHOP");
 			shop.addItem(new ItemStack(Material.COOKED_BEEF,64));
+			shop.addItem(new ItemStack(Material.EXP_BOTTLE,16));
+			p.openInventory(shop);
+		}else if(e.getCurrentItem().getType() == Material.COOKED_BEEF){
+			p.closeInventory();
+			p.getInventory().addItem(new ItemStack(Material.COOKED_BEEF,64));
+		}else if(e.getCurrentItem().getType() == Material.EXP_BOTTLE){
+			p.closeInventory();
+			p.getInventory().addItem(new ItemStack(Material.EXP_BOTTLE,16));
 		}
 	}
 	@EventHandler

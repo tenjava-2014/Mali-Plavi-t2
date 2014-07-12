@@ -20,6 +20,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class Listener implements org.bukkit.event.Listener{
 	public Inventory i;
 	public Inventory music;
+	public Inventory shop;
 	public HashMap<Player,Boolean> to = new HashMap<Player,Boolean>();
 	public HashMap<Player,Boolean> ms = new HashMap<Player,Boolean>(); 
 	public String msg;
@@ -47,18 +48,36 @@ public class Listener implements org.bukkit.event.Listener{
 				m.setItemMeta(mm);
 				//
 				ItemStack music = new ItemStack(Material.JUKEBOX);
-				ItemMeta mum = m.getItemMeta();
+				ItemMeta mum = music.getItemMeta();
 				ArrayList<String> mul = new ArrayList<String>();
 				mul.add(ChatColor.GRAY + "Plays music");
 				mum.setDisplayName("Music");
 				mum.setLore(mul);
 				music.setItemMeta(mum);
+				//
+				ItemStack h = new ItemStack(Material.WOOL);
+				ItemMeta hm = h.getItemMeta();
+				ArrayList<String> hl = new ArrayList<String>();
+				hl.add(ChatColor.GRAY + "Call hospital");
+				hm.setDisplayName("Hospital");
+				hm.setLore(hl);
+				h.setItemMeta(hm);
+				//
+				ItemStack s = new ItemStack(Material.MINECART);
+				ItemMeta sm = m.getItemMeta();
+				ArrayList<String> sl = new ArrayList<String>();
+				sl.add(ChatColor.GRAY + "Shop");
+				sm.setDisplayName("Buy stuff");
+				sm.setLore(sl);
+				s.setItemMeta(sm);
 				
 				
 				//if(p.getItemInHand().getItemMeta().getDisplayName() == "Phone"){
 					i = Bukkit.createInventory(null, 27, "Phone");
 					i.setItem(1, m);
 					i.setItem(3, music);
+					i.setItem(5, h);
+					i.setItem(8, s);
 					p.openInventory(i);
 				//}
 			}	
@@ -112,6 +131,12 @@ public class Listener implements org.bukkit.event.Listener{
 			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_10);p.closeInventory();
 		}else if(e.getCurrentItem().getType() == Material.RECORD_11){
 			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_11);p.closeInventory();
+		}else if(e.getCurrentItem().getType() == Material.WOOL){
+			p.setHealth(p.getHealthScale());
+			p.closeInventory();
+		}else if(e.getCurrentItem().getType() == Material.MINECART){
+			shop = Bukkit.createInventory(null, 9,"SHOP");
+			shop.addItem(new ItemStack(Material.COOKED_BEEF,64));
 		}
 	}
 	@EventHandler

@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class Listener implements org.bukkit.event.Listener{
 	public Inventory i;
+	public Inventory music;
 	public HashMap<Player,Boolean> to = new HashMap<Player,Boolean>();
 	public HashMap<Player,Boolean> ms = new HashMap<Player,Boolean>(); 
 	public String msg;
@@ -74,8 +75,19 @@ public class Listener implements org.bukkit.event.Listener{
 				//msg.setItem(1, new ItemStack(Material.THIN_GLASS));
 			}
 		}
-		else if(e.getCurrentItem().getType() == Material.JUKEBOX){
-			
+		if(e.getCurrentItem().getType() == Material.JUKEBOX){
+			music = Bukkit.createInventory(null , 9);
+			music.addItem(new ItemStack(Material.RECORD_3));
+			music.addItem(new ItemStack(Material.RECORD_4));
+			music.addItem(new ItemStack(Material.RECORD_5));
+			music.addItem(new ItemStack(Material.RECORD_6));
+			music.addItem(new ItemStack(Material.RECORD_7));
+			music.addItem(new ItemStack(Material.RECORD_8));
+			music.addItem(new ItemStack(Material.RECORD_9));
+			music.addItem(new ItemStack(Material.RECORD_10));
+			music.addItem(new ItemStack(Material.RECORD_11));
+			p.closeInventory();
+			p.openInventory(music);
 		}
 	}
 	@EventHandler

@@ -90,7 +90,7 @@ public class Listener implements org.bukkit.event.Listener{
 		if(e.getCurrentItem().getType() == Material.PAPER){
 				if(e.getInventory().getTitle() == "Phone"){
 					p.closeInventory();
-				p.sendMessage("TO(say the person):");
+				p.sendMessage("TO(specify the player):");
 				to.put(p, true);
 				
 				//msg.setItem(1, new ItemStack(Material.THIN_GLASS));
@@ -154,29 +154,32 @@ public class Listener implements org.bukkit.event.Listener{
 		String m = e.getMessage();
 		if(to.containsKey(p) | to.get(p).equals(true)){
 			if(to.get(p).equals(true)){
-				if(m.equals(p)){
+				if(m.equalsIgnoreCase(p.getName())){
 						p.sendMessage(ChatColor.DARK_RED + "You can't send message to yourself");
-						p.sendMessage("TO(say the person):");
-						e.setMessage(null);
+						p.sendMessage("TO(spectify the player):");
 						e.setCancelled(true);
+						return;
 				}
 				for(Player all : Bukkit.getOnlinePlayers()){
-					if(all.equals(m)){
+					if(all.getName().equalsIgnoreCase(m)){
 						player = all;
-						e.setMessage(null);
+						e.setCancelled(true);
 						to.put(p, false);
 						ms.put(p, true);
+						p.sendMessage(player.getName());
 						p.sendMessage("Message:");
 						return;
 					}
 					}
 				p.sendMessage(ChatColor.DARK_RED + "That player is not on the server");
+				p.sendMessage("TO(spectify the player):");
 				}
 			}
 		if(ms.containsKey(p) | ms.get(p).equals(true)){
 			msg = m;
-			player.sendMessage(ChatColor.AQUA + "[" + p + " -> You] " + msg);
-			e.setMessage(null);
+			p.sendMessage(ChatColor.AQUA + "[You -> " + player.getName() + "]" + msg);
+			player.sendMessage(ChatColor.AQUA + "[" + p.getName() + " -> You] " + msg);
+			e.setCancelled(true);
 		}
 		}
 	}

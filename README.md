@@ -25,6 +25,15 @@ Maven will download all required dependencies and build a ready-for-use plugin p
 
 ---------------------------------------
 
+How to get phone
+-----------
+Get phone by typing command /ph
+you need to have permission phone.get or be a op
+
+Theme
+-----------
+Phone
+
 Usage
 -----
 

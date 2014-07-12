@@ -5,6 +5,8 @@ import java.util.HashMap;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Effect;
+import org.bukkit.EntityEffect;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -76,18 +78,40 @@ public class Listener implements org.bukkit.event.Listener{
 			}
 		}
 		if(e.getCurrentItem().getType() == Material.JUKEBOX){
+			e.setCancelled(true);
 			music = Bukkit.createInventory(null , 9);
 			music.addItem(new ItemStack(Material.RECORD_3));
 			music.addItem(new ItemStack(Material.RECORD_4));
 			music.addItem(new ItemStack(Material.RECORD_5));
+			p.closeInventory();
+			p.openInventory(music);
 			music.addItem(new ItemStack(Material.RECORD_6));
 			music.addItem(new ItemStack(Material.RECORD_7));
 			music.addItem(new ItemStack(Material.RECORD_8));
 			music.addItem(new ItemStack(Material.RECORD_9));
 			music.addItem(new ItemStack(Material.RECORD_10));
 			music.addItem(new ItemStack(Material.RECORD_11));
+		}
+		if(e.getCurrentItem().getType() == Material.RECORD_3){
+			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_3);
 			p.closeInventory();
-			p.openInventory(music);
+		}else if(e.getCurrentItem().getType() == Material.RECORD_4){
+			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_4);
+			p.closeInventory();
+		}else if(e.getCurrentItem().getType() == Material.RECORD_5){
+			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_5);p.closeInventory();
+		}else if(e.getCurrentItem().getType() == Material.RECORD_6){
+			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_6);p.closeInventory();
+		}else if(e.getCurrentItem().getType() == Material.RECORD_7){
+			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_7);p.closeInventory();
+		}else if(e.getCurrentItem().getType() == Material.RECORD_8){
+			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_8);p.closeInventory();
+		}else if(e.getCurrentItem().getType() == Material.RECORD_9){
+			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_9);p.closeInventory();
+		}else if(e.getCurrentItem().getType() == Material.RECORD_10){
+			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_10);p.closeInventory();
+		}else if(e.getCurrentItem().getType() == Material.RECORD_11){
+			p.playEffect(p.getLocation(), Effect.RECORD_PLAY, Material.RECORD_11);p.closeInventory();
 		}
 	}
 	@EventHandler

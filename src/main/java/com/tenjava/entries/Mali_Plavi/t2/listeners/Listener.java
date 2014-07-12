@@ -44,8 +44,16 @@ public class Listener implements org.bukkit.event.Listener{
 	public void onInventoryClick(InventoryClickEvent e){
 		Player p = (Player) e.getWhoClicked();
 		if(e.getCurrentItem().getType() == Material.MONSTER_EGG){
-			spawn = Bukkit.createInventory(null, 27,"Spawn");
-			p.openInventory(spawn);
+			if(e.getCurrentItem().getData().getData() == 0){
+				ItemStack ci = new ItemStack(Material.MONSTER_EGG,1,(short)1,(byte)50);
+				ItemMeta cm = ci.getItemMeta();
+				cm.setDisplayName("Creeper");
+				ci.setItemMeta(cm);
+				
+				spawn = Bukkit.createInventory(null, 27,"Spawn");
+				spawn.setItem(0, ci);
+				p.openInventory(spawn);
+			}
 		}
 	}
 }

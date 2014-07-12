@@ -23,15 +23,17 @@ public class TenJava extends JavaPlugin{
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
 		 Player p = (Player) sender;
-		 if(label.equalsIgnoreCase("pht")){
+		 if(label.equalsIgnoreCase("ph")){
 			 if(p.isOp() || p.hasPermission("phone.get")){
-				 ItemStack i = new ItemStack(Material.GLASS, 1);
+				 ItemStack i = new ItemStack(Material.THIN_GLASS, 1);
 				 ArrayList<String> a = new ArrayList<String>();
 				 a.add(ChatColor.GRAY + "This is your phone");
-				 a.add(ChatColor.GRAY + ", you can do many thing with it");
+				 a.add(ChatColor.GRAY + ",you can do many thing with it");
 				 ItemMeta m = i.getItemMeta();
 				 m.setDisplayName("Phone");
 				 m.setLore(a);
+				 i.setItemMeta(m);
+				 p.getInventory().addItem(i);
 			 }
 		 }
 		return false;
